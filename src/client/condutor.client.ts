@@ -18,7 +18,7 @@ export class CondutorClient{
         try{
             return (await this.axiosClient.get<Condutor>(`/${id}`)).data
         }catch(error:any){
-            
+            return Promise.reject(error.response)
         }
     }
 
