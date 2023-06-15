@@ -3,5 +3,4 @@ export class AbstractEntity{
     cadastro! : Date
     atualizacao! : Date
     ativo! : boolean
-
 }

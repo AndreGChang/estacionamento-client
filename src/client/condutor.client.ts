@@ -1,8 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { Condutor } from "@/model/Condutor";
 
-
-
 export class CondutorClient{
     
     private axiosClient: AxiosInstance;
@@ -13,7 +11,8 @@ export class CondutorClient{
             headers: {'Content-type' : 'application/json'}
         });
     }
-
+    
+    // buscar por ID
     public async findById(id: number) : Promise<Condutor> {
         try{
             return (await this.axiosClient.get<Condutor>(`/${id}`)).data
@@ -22,4 +21,48 @@ export class CondutorClient{
         }
     }
 
+    // buscar uma lista
+    public async listAll() : Promise<Condutor[]> {
+        try{
+            return (await this.axiosClient.get<Condutor[]>(`/lista`)).data
+        }catch(error:any){
+            return Promise.reject(error.response)
+        }
+    }   
+
+    public async listAtivos() : Promise<Condutor[]>{
+        try{
+            return (await this.axiosClient.get<Condutor[]>('/ativo')).data
+        }catch(error:any){
+            return Promise.reject(error.response)
+        }
+    }
+
+    // cadastrar um condutor
+    public async cadastrar(condutor: Condutor): Promise<void> {
+		try {
+			return (await this.axiosClient.post('/', condutor))
+		} catch (error:any) {
+			return Promise.reject(error.response)
+		}
+	}
+
+    // editar um condutor
+    public async editar(condutor: Condutor): Promise<void> {
+		try {
+			return (await this.axiosClient.put(`/${condutor.id}`, condutor)).data
+		} catch (error:any) {
+			return Promise.reject(error.response)
+		}
+	}
+
+    // deletar um condutor
+    public async delete(id: number) : Promise<string> {
+        try {
+            return (await this.axiosClient.delete<string>(`/${id}`)).data
+        }
+        catch(error: any) {
+            return Promise.reject(error.response)
+        }
+    }
 }
