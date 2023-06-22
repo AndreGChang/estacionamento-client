@@ -1,7 +1,7 @@
 export enum Cor{
-    VERDE,
-    BRANCO,
-    AMARELO,
-    PRETO,
-    CONZA
+    VERDE = "VERDE",
+    BRANCO = "BRANCO",
+    AMARELO = "AMARELO",
+    PRETO = "PRETO",
+    CONZA = "CINZA"
 }

@@ -1,52 +1,53 @@
-import { Marca } from "@/model/Marca";
+
+import { Veiculo } from "@/model/Veiculo";
 import axios, { AxiosInstance } from "axios";
 
-export class MarcaClient{
+ class VeiculoClient{
 
     private axiosClient: AxiosInstance;
 
     constructor() {
         this.axiosClient = axios.create({
-            baseURL: 'http://localhost:8080/api/marca',
+            baseURL: 'http://localhost:8080/api/veiculo',
             headers: {'Content-type' : 'application/json'}
         });
     }
 
-    public async findById(id : number) : Promise<Marca> {
+    public async findById(id : number) : Promise<Veiculo> {
         try{
-            return(await this.axiosClient.get<Marca>(`/${id}`)).data
+            return(await this.axiosClient.get<Veiculo>(`/${id}`)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async listAll() : Promise<Marca[]>{
+    public async listAll() : Promise<Veiculo[]>{
         try{
-            return (await this.axiosClient.get<Marca[]>(`/listar`)).data
+            return (await this.axiosClient.get<Veiculo[]>(`/lista`)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async listAtivos() : Promise<Marca[]>{ 
+    public async listAtivos() : Promise<Veiculo[]>{
         try{
-            return (await this.axiosClient.get<Marca[]>('/ativo')).data
+            return (await this.axiosClient.get<Veiculo[]>('/ativo')).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async cadastrar(marca : Marca) : Promise<void>{
+    public async cadastrar(marca : Veiculo) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', marca)).data
+            return (await this.axiosClient.post<string>('', marca)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async editar(marca : Marca) : Promise<Marca>{
+    public async editar(id : number,marca : Veiculo) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${marca.id}`,marca)).data
+            return (await this.axiosClient.put<string>(`/${id}`,marca)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
@@ -61,3 +62,5 @@ export class MarcaClient{
     }
 
 }
+
+export default new VeiculoClient();
