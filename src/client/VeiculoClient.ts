@@ -2,7 +2,7 @@
 import { Veiculo } from "@/model/Veiculo";
 import axios, { AxiosInstance } from "axios";
 
- class VeiculoClient{
+ class VeiculoClient{ 
 
     private axiosClient: AxiosInstance;
 
@@ -45,9 +45,9 @@ import axios, { AxiosInstance } from "axios";
         }
     }
 
-    public async editar(id : number,marca : Veiculo) : Promise<string>{
+    public async editar(id : number,veiculo : Veiculo) : Promise<string>{
         try{
-            return (await this.axiosClient.put<string>(`/${id}`,marca)).data
+            return (await this.axiosClient.put<string>(`/${id}`, veiculo)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }

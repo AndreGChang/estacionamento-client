@@ -28,7 +28,7 @@
         </div>
         <div class="row" style="margin-top: 10px;">
             <div class="col-md-12 text-start">
-                <select v-model="modelo.marca" class="form-select" aria-label="Default select example">
+                <select v-model="modelo.marca" :disabled="this.form === 'excluir' ? '' : disabled" class="form-select" aria-label="Default select example">
                     <option v-for="item in marca" :value="item" >{{ item.nome }}</option>
                 </select>
             </div>

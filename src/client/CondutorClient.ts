@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import { Condutor } from "@/model/Condutor";
 
-export class CondutorClient{
+
+class CondutorClient{
     
     private axiosClient: AxiosInstance;
 
@@ -39,18 +40,18 @@ export class CondutorClient{
     }
 
     // cadastrar um condutor
-    public async cadastrar(condutor: Condutor): Promise<void> {
+    public async cadastrar(condutor: Condutor): Promise<string> {
 		try {
-			return (await this.axiosClient.post('/', condutor))
+			return (await this.axiosClient.post<string>('', condutor)).data
 		} catch (error:any) {
 			return Promise.reject(error.response)
 		}
 	}
 
     // editar um condutor
-    public async editar(condutor: Condutor): Promise<void> {
+    public async editar(id:number,condutor: Condutor): Promise<string> {
 		try {
-			return (await this.axiosClient.put(`/${condutor.id}`, condutor)).data
+			return (await this.axiosClient.put<string>(`/${id}`, condutor)).data
 		} catch (error:any) {
 			return Promise.reject(error.response)
 		}
@@ -66,3 +67,5 @@ export class CondutorClient{
         }
     }
 }
+
+export default new CondutorClient()

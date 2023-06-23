@@ -30,7 +30,6 @@ const routes: Array<RouteRecordRaw> = [
         name: 'cadastrar-marca-excluir-view',
         component: () => import(/* webpackChunkName: "about" */ '../views/marca/CadastrarMarcaForm.vue')
       }
-
     ]
   },
   {
@@ -105,7 +104,19 @@ const routes: Array<RouteRecordRaw> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/condutor/CadastrarCondutorView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/condutor/CadastrarCondutorView.vue'),
+    children:[
+      {
+        path: '/cadastrar-condutor',
+        name: 'cadastrar-condutor-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/condutor/CadastrarCondutorView.vue')
+      },
+      {
+        path: '/cadastrar-condutor',
+        name: 'cadastrar-condutor-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/condutor/CadastrarCondutorView.vue')
+      }
+    ]
   },
   {
     path: '/listar-movimentacao',

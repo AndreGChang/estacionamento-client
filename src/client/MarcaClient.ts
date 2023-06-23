@@ -1,7 +1,7 @@
 import { Marca } from "@/model/Marca";
 import axios, { AxiosInstance } from "axios";
 
-class MarcaClient{
+class MarcaClient{ 
 
     private axiosClient: AxiosInstance;
 

@@ -45,7 +45,7 @@
                                     <div class="p-2 g-col-6">
                                         <div class="btn-group" role="group" ariel-label="Basic mixed styles example">
                                             <RouterLink type="button" class="btn btn-outline-warning"
-                                                :to="{ name: 'cadastrar-modelo-editar-view', query: { id: item.id, form: 'editar' } }">
+                                                :to="{ name: 'cadastrar-veiculo-editar-view', query: { id: item.id, form: 'editar' } }">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="btn-group" role="group" ariel-label="basic mixed styles example">
                                             <RouterLink type="button" class="btn btn-outline-danger"
-                                                :to="{ name: 'cadastrar-modelo-excluir-view', query: { id: item.id, form: 'excluir' } }">
+                                                :to="{ name: 'cadastrar-veiculo-excluir-view', query: { id: item.id, form: 'excluir' } }">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path
@@ -81,7 +81,7 @@
 
         </div>
     </div>
-</template>
+</template> 
   
 <style scoped lang="scss">
 .d {

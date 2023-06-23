@@ -4,7 +4,7 @@
             <div class="col">
                 <h1>Lista Marca</h1>
             </div>
-            <div class="col">
+            <div class="col"> 
                 <RouterLink to="/cadastrar-marca">
                     <button type="button" class="btn btn-success">Cadastrar</button>
                 </RouterLink>

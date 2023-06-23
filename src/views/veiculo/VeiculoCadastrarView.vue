@@ -17,34 +17,48 @@
                 </div>
             </div>
         </div>
-        
-        <div class="row">   
+
+        <div class="row">
             <div class="col-md-12 text-start">
                 <label class="form-label">Placa*</label>
-                <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="veiculo.placa">
+                <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+                    v-model="veiculo.placa">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-start">
                 <label class="form-label">Ano*</label>
-                <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control" v-model="veiculo.ano">
+                <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+                    v-model="veiculo.ano">
             </div>
         </div>
 
         <div class="row" style="margin-top: 10px;">
             <div class="col-md-12 text-start">
-                <select v-model="corSelecionada" class="form-select" aria-label="Default select example">
-                    <option v-for="cor in Object.values(corsEnum)" :value="cor">{{ cor }}</option>
+                <label class="form-label" for="cor-enum">Cor*</label>
+                <select v-model="veiculo.cor" :disabled="this.form === 'excluir' ? '' : disabled" class="form-select" aria-label="Default select example" id="cor-enum">
+                    <option v-for="cor in corsEnum" :value="cor">{{ cor }}</option>
                 </select>
             </div>
         </div>
         <div class="row" style="margin-top: 10px;">
             <div class="col-md-12 text-start">
-                <select v-model="tipoSelecionado" class="form-select" aria-label="Default select example">
-                    <option v-for="tipo in Object.values(tipoEnum)" :value="tipo">{{ tipo }}</option>
+                <label class="form-label" for="tipo-veiculo">Tipo*</label>
+                <select v-model="veiculo.tipo" :disabled="this.form === 'excluir' ? '' : disabled" class="form-select" aria-label="Default select example" id="tipo-veiculo">
+                    <option v-for="tipo in tipoEnum" :value="tipo">{{ tipo }}</option>
                 </select>
             </div>
         </div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-12 text-start">
+                <label for="modelo-veiculo">Modelo*</label>
+                <select v-model="veiculo.modelo" :disabled="this.form === 'excluir' ? '' : disabled" class="form-select" aria-label="Default select example" id="modelo-veiculo">
+                    <option v-for="item in modelo" :value="item">{{ item.nome }}</option>
+                </select>
+            </div>
+        </div>
+        <hr />
+
         <div class="row">
             <div class="col-md-3 offset-md-6">
                 <div class="d-grid gap-2">
@@ -78,14 +92,18 @@ import { Veiculo } from '@/model/Veiculo';
 import VeiculoClient from '@/client/VeiculoClient';
 import { Cor } from '@/model/Cor';
 import { Tipo } from '@/model/Tipo';
-
-
+import ModeloClient from '@/client/ModeloClient';
+import MarcaClient from '@/client/MarcaClient';
+import { Marca } from '@/model/Marca';
+import { Modelo } from '@/model/Modelo';
 
 export default defineComponent({
     name: 'CadastrarVeiculoView',
     data() {
         return {
             veiculo: new Veiculo(),
+            marca: new Array<Marca>(),
+            modelo: new Array<Modelo>(),
             mensagem: {
                 ativo: false as boolean,
                 titulo: "" as string,
@@ -93,9 +111,7 @@ export default defineComponent({
                 css: "" as string
             },
             corsEnum: Cor,
-            corSelecionada: Cor.AMARELO,
             tipoEnum: Tipo,
-            tipoSelecionado: Tipo.CARRO
         }
     },
     computed: {
@@ -107,17 +123,36 @@ export default defineComponent({
         }
     },
     mounted() {
+        this.findAllMarca();
+        this.findAllModelo();
+
         if (this.id !== undefined) {
             this.findById(Number(this.id));
         }
+
     },
     methods: {
         findById(id: number) {
             VeiculoClient.findById(id).then(success => {
                 this.veiculo = success
+                console.log(this.veiculo.modelo.marca)
             }).catch(error => {
                 console.log(error);
             });
+        },
+        findAllMarca() {
+            MarcaClient.listAll().then(success => {
+                this.marca = success
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        findAllModelo() {
+            ModeloClient.listAll().then(success => {
+                this.modelo = success
+            }).catch(error => {
+                console.log(error)
+            })
         },
         onClickCadastrar() {
             VeiculoClient.cadastrar(this.veiculo).then(success => {
@@ -128,8 +163,9 @@ export default defineComponent({
                 this.mensagem.titulo = "Dale.";
                 this.mensagem.css = "alert alert-success alert-dismissible fade show";
             }).catch(error => {
+                const bruh = error.data
                 this.mensagem.ativo = true;
-                this.mensagem.mensagem = error;
+                this.mensagem.mensagem = bruh;
                 this.mensagem.titulo = "Error. ";
                 this.mensagem.css = "alert alert-danger alert-dismissible fade show";
             })
@@ -149,7 +185,7 @@ export default defineComponent({
                 this.mensagem.css = "alert alert-danger alert-dismissible fade show";
             });
         },
-        onClickDeletar() {
+        onClickExcluir() {
             VeiculoClient.deletar(this.veiculo.id).then(success => {
                 this.veiculo = new Veiculo()
 
