@@ -4,7 +4,7 @@ export class Configuracao extends AbstractEntity{
 
     valorHora! : number
     valorMulta! : number
-    inicioExepedinete! :  Date
+    inicioExpediente! :  Date
     fimExpediente! : Date
     tempoParaDesconto! : number
     tempoDeDesconto! : number

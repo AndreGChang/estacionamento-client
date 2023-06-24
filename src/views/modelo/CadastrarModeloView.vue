@@ -21,19 +21,21 @@
 
         <div class="row">
             <div class="col-md-12 text-start">
-                <label class="form-label">Nomo do modelo *</label>
+                <label class="form-label">Nome do modelo *</label>
                 <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
                     v-model="modelo.nome">
             </div>
         </div>
         <div class="row" style="margin-top: 10px;">
             <div class="col-md-12 text-start">
-                <select v-model="modelo.marca" :disabled="this.form === 'excluir' ? '' : disabled" class="form-select" aria-label="Default select example">
+                <label class="modelo-marca">Marca *</label>
+                <select v-model="modelo.marca" :disabled="this.form === 'excluir' ? '' : disabled" class="form-select" aria-label="Default select example" id="modelo-marca">
                     <option v-for="item in marca" :value="item" >{{ item.nome }}</option>
                 </select>
             </div>
-
         </div>
+
+        <hr />
 
         <div class="row">
             <div class="col-md-3 offset-md-6">
@@ -109,8 +111,10 @@ export default defineComponent({
                 this.modelo = success;
 
             }).catch(error => {
+                const bruh = error.data
+
                 this.mensagem.ativo = true;
-                this.mensagem.mensagem = error;
+                this.mensagem.mensagem = bruh;
                 this.mensagem.titulo = "Error. ";
                 this.mensagem.css = "alert alert-danger alert-dismissible fade show";
             })
@@ -126,15 +130,17 @@ export default defineComponent({
         onClickCadastrar() {
             ModeloClient.cadastrar(this.modelo).then(success => {
                 this.modelo = new Modelo()
-
+                
                 this.mensagem.ativo = true;
                 this.mensagem.mensagem = success;
                 this.mensagem.titulo = "Dale.";
                 this.mensagem.css = "alert alert-success alert-dismissible fade show";
             })
                 .catch(error => {
+                    const bruh = error.data
+
                     this.mensagem.ativo = true;
-                    this.mensagem.mensagem = error;
+                    this.mensagem.mensagem = bruh;
                     this.mensagem.titulo = "Error. ";
                     this.mensagem.css = "alert alert-danger alert-dismissible fade show";
                     console.log(error)
@@ -150,8 +156,10 @@ export default defineComponent({
                 this.mensagem.css = "alert alert-success alert-dismissible fade show";
             })
                 .catch(error => {
+                    const bruh = error.data
+
                     this.mensagem.ativo = true;
-                    this.mensagem.mensagem = error;
+                    this.mensagem.mensagem = bruh;
                     this.mensagem.titulo = "Error. ";
                     this.mensagem.css = "alert alert-danger alert-dismissible fade show";
                 });
@@ -163,8 +171,10 @@ export default defineComponent({
                 this.$router.push({ name: 'modelo-lista-view' });
             })
                 .catch(error => {
+                    const bruh = error.data
+
                     this.mensagem.ativo = true;
-                    this.mensagem.mensagem = error;
+                    this.mensagem.mensagem =bruh;
                     this.mensagem.titulo = "Error. ";
                     this.mensagem.css = "alert alert-danger alert-dismissible fade show";
                 })

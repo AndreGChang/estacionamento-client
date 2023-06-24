@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col-md-10 text-start">
-        <p class="fs-3"> Cadastrar de Marca </p>
+        <p class="fs-3"> Cadastrar de Marca </p> 
       </div>
       <div class="col-md-2"> </div>
     </div>

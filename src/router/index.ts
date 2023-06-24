@@ -147,12 +147,12 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/teste-tabela',
-    name: 'teste-tabela-view',
+    path: '/recibo',
+    name: 'movimentacao-recibo-view',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/TabelaView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/movimentacao/MovimentacaoRecibo.vue')
   },
   {
     path: '/configuracao',
@@ -161,15 +161,8 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/configuracao/ConfiguracaoListarView.vue')
-  },
-  {
-    path: '/cadastrar-configuracao',
-    name: 'cadastrar-configuracao-view',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/configuracao/CadastrarConfiguracaoView.vue')
   }
+
 ]
 
 const router = createRouter({

@@ -6,7 +6,7 @@
                 <p class="fs-3"> Cadastrar Movimentacao</p>
             </div>
             <div class="col-md-2"> </div>
-        </div>
+        </div> 
         <hr />
 
         <div v-if="mensagem.ativo" class="row">
@@ -88,7 +88,7 @@ export default defineComponent({
                 titulo: "" as string,
                 mensagem: "" as string,
                 css: "" as string
-            }
+            } 
         };
     },
     computed: {
@@ -175,6 +175,11 @@ export default defineComponent({
                 this.mensagem.mensagem = bruh;
                 this.mensagem.titulo = "Error. ";
                 this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+            })
+        },
+        onCLickFecharMovimentacao(){
+            MovimentacaoClient.fecharMovimentacao(this.movimentacao.id).then(success =>{
+                
             })
         }
     }

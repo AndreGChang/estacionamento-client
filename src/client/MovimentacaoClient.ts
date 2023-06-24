@@ -1,5 +1,6 @@
 
 import { Movimentacao } from "@/model/Movimentacao";
+import { Recibo } from "@/model/Recibo";
 import axios, { AxiosInstance } from "axios";
 
 
@@ -7,7 +8,7 @@ class MovimentacaoClient{
 
     private axiosClient: AxiosInstance;
 
-    constructor() {
+    constructor() { 
         this.axiosClient = axios.create({
             baseURL: 'http://localhost:8080/api/movimentacao',
             headers: {'Content-type' : 'application/json'}
@@ -18,7 +19,7 @@ class MovimentacaoClient{
         try{
             return(await this.axiosClient.get<Movimentacao>(`/${id}`)).data
         }catch(error:any){
-            return Promise.reject(error.response)
+            return Promise.reject(error.response);
         }
     }
 
@@ -26,7 +27,7 @@ class MovimentacaoClient{
         try{
             return (await this.axiosClient.get<Movimentacao[]>(`/lista`)).data
         }catch(error:any){
-            return Promise.reject(error.response)
+            return Promise.reject(error.response);
         }
     }
 
@@ -34,7 +35,7 @@ class MovimentacaoClient{
         try{
             return (await this.axiosClient.get<Movimentacao[]>('/ativo')).data
         }catch(error:any){
-            return Promise.reject(error.response)
+            return Promise.reject(error.response);
         }
     }
 
@@ -42,7 +43,7 @@ class MovimentacaoClient{
         try{
             return (await this.axiosClient.post<string>('', movimentacao)).data
         }catch(error:any){
-            return Promise.reject(error.response)
+            return Promise.reject(error.response);
         }
     }
 
@@ -50,7 +51,7 @@ class MovimentacaoClient{
         try{
             return (await this.axiosClient.put<string>(`/${id}`,movimentacao)).data
         }catch(error:any){
-            return Promise.reject(error.response)
+            return Promise.reject(error.response);
         }
     }
 
@@ -58,7 +59,15 @@ class MovimentacaoClient{
         try{
             return (await this.axiosClient.delete<string>(`/${id}`)).data
         }catch(error:any){
-            return Promise.reject(error.response)
+            return Promise.reject(error.response);
+        }
+    }
+
+    public async fecharMovimentacao(id : number) : Promise<Recibo>{
+        try{    
+            return(await this.axiosClient.put<Recibo>(`/saida/${id}`)).data
+        }catch(error : any){
+            return Promise.reject(error.response);
         }
     }
 

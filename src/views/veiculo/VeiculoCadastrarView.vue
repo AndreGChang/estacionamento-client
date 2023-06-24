@@ -111,7 +111,7 @@ export default defineComponent({
                 css: "" as string
             },
             corsEnum: Cor,
-            tipoEnum: Tipo,
+            tipoEnum: Tipo
         }
     },
     computed: {
