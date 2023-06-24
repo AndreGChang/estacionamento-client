@@ -29,7 +29,7 @@
                             <th scope="row">{{ item.id }}</th>
                             <td>
                                 <span v-if="item.ativo" class="badge text-bg-success">ativo</span>
-                                <span v-if="!item.ativo" class="badge text-bg-success"></span>
+                                <span v-if="!item.ativo" class="badge text-bg-danger">inativo</span>
                             </td>
                             <td>{{ item.nome }}</td>
                             <td>{{ item.cpf }}</td>

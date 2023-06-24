@@ -58,7 +58,7 @@ class CondutorClient{
 	}
 
     // deletar um condutor
-    public async delete(id: number) : Promise<string> {
+    public async deletar(id: number) : Promise<string> {
         try {
             return (await this.axiosClient.delete<string>(`/${id}`)).data
         }

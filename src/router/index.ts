@@ -120,7 +120,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/listar-movimentacao',
-    name: 'movimentacao-lista-view',
+    name: 'movimentacao-listar-view',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -132,7 +132,19 @@ const routes: Array<RouteRecordRaw> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/movimentacao/CadastrarMovimentacaoView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/movimentacao/CadastrarMovimentacaoView.vue'),
+    children:[
+      {
+        path: '/cadastrar-movimentacao',
+        name: 'cadastrar-movimentacao-editar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/movimentacao/CadastrarMovimentacaoView.vue')
+      },
+      {
+        path: '/cadastrar-movimentacao',
+        name: 'cadastrar-movimentacao-excluir-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/movimentacao/CadastrarMovimentacaoView.vue')
+      }
+    ]
   },
   {
     path: '/teste-tabela',
@@ -143,8 +155,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/TabelaView.vue')
   },
   {
-    path: '/listar-configuracao',
-    name: 'listar-configuracao-view',
+    path: '/configuracao',
+    name: 'configuracao-view',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

@@ -28,14 +28,14 @@
         <div class="row">
             <div class="col-md-12 text-start">
                 <label class="form-label">CPF*</label>
-                <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+                <input placeholder="000.000.000-00" type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
                     v-model="condutor.cpf">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-start">
                 <label class="form-label">Telefone*</label>
-                <input type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
+                <input placeholder="+55(045)12345-1234" type="text" :disabled="this.form === 'excluir' ? '' : disabled" class="form-control"
                     v-model="condutor.telefone">
             </div>
         </div>
@@ -45,30 +45,7 @@
         <div class="row">
             <div class="col-md-3 offset-md-6">
                 <div class="d-grid gap-2">
-                    <router-link type="button" class="btn btn-info" to="/listar-veiculo">Voltar
-                    </router-link>
-                </div>
-            </div>
-            <div class="col-md-3 ">
-                <div class="d-grid gap-2">
-                    <button v-if="this.form === undefined" type="button" class="btn btn-success"
-                        @click="onClickCadastrar()">
-                        Cadastrar
-                    </button>
-                    <button v-if="this.form === 'editar'" type="button" class="btn btn-warning" @click="onClickEditar()">
-                        Editar
-                    </button>
-                    <button v-if="this.form === 'excluir'" type="button" class="btn btn-danger" @click="onClickExcluir()">
-                        Excluir
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3 offset-md-6">
-                <div class="d-grid gap-2">
-                    <router-link type="button" class="btn btn-info" to="/listar-veiculo">Voltar
+                    <router-link type="button" class="btn btn-info" to="/listar-condutor">Voltar
                     </router-link>
                 </div>
             </div>
@@ -141,6 +118,7 @@ export default defineComponent({
                 this.mensagem.css = "alert alert-success alert-dismissible fade show";
             }).catch(error => {
                 const bruh = error.data
+
                 this.mensagem.ativo = true;
                 this.mensagem.mensagem = bruh;
                 this.mensagem.titulo = "Error. ";
@@ -156,11 +134,27 @@ export default defineComponent({
                 this.mensagem.titulo = "Dale.";
                 this.mensagem.css = "alert alert-success alert-dismissible fade show";
             }).catch(error => {
+                const bruh = error.data
+
                 this.mensagem.ativo = true;
-                this.mensagem.mensagem = error;
+                this.mensagem.mensagem = bruh;
                 this.mensagem.titulo = "Error. ";
                 this.mensagem.css = "alert alert-danger alert-dismissible fade show";
             });
+        },
+        onClickExcluir() {
+            CondutorClient.deletar(this.condutor.id).then(success => {
+                this.condutor = new Condutor()
+
+                this.$router.push({ name: 'condutor-lista-view' });
+            }).catch(error => {
+                const bruh = error.data
+
+                this.mensagem.ativo = true;
+                this.mensagem.mensagem = bruh;
+                this.mensagem.titulo = "Error. ";
+                this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+            })
         }
     }
 });

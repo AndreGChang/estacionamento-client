@@ -2,13 +2,14 @@
 import { Movimentacao } from "@/model/Movimentacao";
 import axios, { AxiosInstance } from "axios";
 
-export class MarcaClient{
+
+class MovimentacaoClient{
 
     private axiosClient: AxiosInstance;
 
     constructor() {
         this.axiosClient = axios.create({
-            baseURL: 'http://localhost:8080/api/marca',
+            baseURL: 'http://localhost:8080/api/movimentacao',
             headers: {'Content-type' : 'application/json'}
         });
     }
@@ -23,7 +24,7 @@ export class MarcaClient{
 
     public async listAll() : Promise<Movimentacao[]>{
         try{
-            return (await this.axiosClient.get<Movimentacao[]>(`/listar`)).data
+            return (await this.axiosClient.get<Movimentacao[]>(`/lista`)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
@@ -37,17 +38,17 @@ export class MarcaClient{
         }
     }
 
-    public async cadastrar(marca : Movimentacao) : Promise<void>{
+    public async cadastrar(movimentacao : Movimentacao) : Promise<string>{
         try{
-            return (await this.axiosClient.post('/', marca)).data
+            return (await this.axiosClient.post<string>('', movimentacao)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
     }
 
-    public async editar(marca : Movimentacao) : Promise<Movimentacao>{
+    public async editar(id : number, movimentacao : Movimentacao) : Promise<string>{
         try{
-            return (await this.axiosClient.put(`/${marca.id}`,marca)).data
+            return (await this.axiosClient.put<string>(`/${id}`,movimentacao)).data
         }catch(error:any){
             return Promise.reject(error.response)
         }
@@ -62,3 +63,5 @@ export class MarcaClient{
     }
 
 }
+
+export default new  MovimentacaoClient();
