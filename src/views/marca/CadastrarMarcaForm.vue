@@ -99,7 +99,7 @@ export default defineComponent({
           const bruh = error.data;
 
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = bruh;
+          this.mensagem.mensagem =  bruh;
           this.mensagem.titulo = "BRUH. ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });

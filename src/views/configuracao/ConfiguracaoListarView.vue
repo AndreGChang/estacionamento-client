@@ -115,8 +115,6 @@
                         <select v-model="configuracao.gerarDesconto" :disabled="this.form === 'excluir' ? '' : disabled"
                             class="form-select" aria-label="Default select example">
                             <option v-for="item in options" :value="item.value">{{ item.text }}</option>
-                            <!-- <option :value="{ s: true }">true</option>
-                            <option :value="{ n: false }">false</option> -->
                         </select>
                     </div>
                 </div>

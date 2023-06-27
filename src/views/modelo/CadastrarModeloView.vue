@@ -33,7 +33,7 @@
                     <option v-for="item in marca" :value="item" >{{ item.nome }}</option>
                 </select>
             </div>
-        </div>
+        </div> 
 
         <hr />
 

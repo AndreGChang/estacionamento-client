@@ -11,4 +11,4 @@ export class Modelo extends AbstractEntity{
         this.ativo=true
     }
 
-}
+} 

@@ -9,7 +9,7 @@
                     <button type="button" class="btn btn-success">Cadastrar</button>
                 </RouterLink>
             </div>
-        </div>  
+        </div>
 
         <div class="col-12">
             <div class="">
@@ -21,6 +21,7 @@
                             <th scope="col">Entrada</th>
                             <th scope="col">Veiculo</th>
                             <th scope="col">Condutor</th>
+                            <th scoped="col">Valor</th>
                             <th scoped="col">Opc</th>
                             <th scope="col">Finalizar Movimentacao</th>
                         </tr>
@@ -32,9 +33,10 @@
                                 <span v-if="item.ativo" class="badge text-bg-success">ativo</span>
                                 <span v-if="!item.ativo" class="badge text-bg-danger">inativo</span>
                             </td>
-                            <td>{{ item.entrada }}</td>
+                            <td>{{ item.entrada}}</td>
                             <td>{{ item.veiculo.placa }}</td>
                             <td>{{ item.condutor.nome }}</td>
+                            <td>{{ item.valorHoraTotal }}</td>
                             <th class="col-md-2">
                                 <div class="grid d-flex justify-content-center">
                                     <div class="p-2 g-col-6">
@@ -72,7 +74,8 @@
                             <th class="col-md-2">
                                 <div class="p-2 g-col-6">
                                     <div class="btn-group" role="group" aria-label="basic mixed styles example">
-                                        <RouterLink type="button" class="btn btn-outline-danger  btn-lg" :to="{name : 'movimentacao-recibo-view', query: {id: item.id}}">
+                                        <RouterLink type="button" class="btn btn-outline-danger  btn-lg"
+                                            :to="{ name: 'movimentacao-recibo-view', query: { id: item.id } }">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                                 fill="currentColor" class="bi bi-sign-stop" viewBox="0 0 16 16">
                                                 <path
@@ -97,11 +100,9 @@
   
 <style scoped lang="scss">
 .d {
-    color: black; 
+    color: black;
 }
 </style>
-
-
 
 
 <script lang="ts">
@@ -114,7 +115,8 @@ export default defineComponent({
     name: 'VeiculoListaView',
     data() {
         return {
-            movimentacaoLista: new Array<Movimentacao>()
+            movimentacaoLista: new Array<Movimentacao>(),
+            movimentacaoListaAtivos: new Array<Movimentacao>()
         };
     },
     mounted() {
@@ -124,10 +126,19 @@ export default defineComponent({
         findAll() {
             MovimentacaoClient.listAll().then(success => {
                 this.movimentacaoLista = success
+
             }).catch(error => {
                 console.log(error);
             });
+        },
+        findAtivos() {
+            MovimentacaoClient.listAtivos().then(success => {
+                this.movimentacaoListaAtivos = success
+            }).catch(error => {
+                console.log(error)
+            })
         }
+
     }
 });
 
